@@ -1,8 +1,8 @@
 package io.mosaed.productservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.mosaed.productservice.dto.ProductRequest;
-import io.mosaed.productservice.repository.ProductRepository;
+import io.mosaed.productservice.presentation.dto.ProductRequest;
+import io.mosaed.productservice.external.db.ProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Testcontainers
 @AutoConfigureMockMvc
-class ProductServiceApplicationTests {
+class ProductEntityServiceApplicationTests {
 
 	@Container
 	static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:6.0");
@@ -62,7 +62,7 @@ class ProductServiceApplicationTests {
 	}
 
 	private ProductRequest getProductRequest() {
-		return ProductRequest.builder()
+		return new ProductRequest.ProductRequestBuilder()
 				.name("iPhone 14")
 				.description("Apple new release")
 				.price(BigDecimal.valueOf(5499))

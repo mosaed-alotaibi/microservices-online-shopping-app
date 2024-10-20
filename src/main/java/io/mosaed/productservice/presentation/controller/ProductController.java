@@ -1,9 +1,8 @@
-package io.mosaed.productservice.controller;
+package io.mosaed.productservice.presentation.controller;
 
-import io.mosaed.productservice.dto.ProductRequest;
-import io.mosaed.productservice.dto.ProductResponse;
-import io.mosaed.productservice.service.ProductService;
-import lombok.RequiredArgsConstructor;
+import io.mosaed.productservice.presentation.dto.ProductRequest;
+import io.mosaed.productservice.presentation.dto.ProductResponse;
+import io.mosaed.productservice.service.ProductServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,15 +10,17 @@ import java.util.List;
 
 /**
  * @author MOSAED ALOTAIBI
- * @created 3/3/2023 at 23:18
  */
 
 @RestController
 @RequestMapping("/api/product")
-@RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
+
+    public ProductController(ProductServiceImpl productService) {
+        this.productService = productService;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
